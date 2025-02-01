@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Hover Effects</title>
+  <style>
+    /* Cores */
+    :root {
+      --red: #7b0ab0;
+      --white: #fff;
+    }
+
+    /* Estilos base */
+    * {
+      box-sizing: inherit;
+      transition-property: all;
+      transition-duration: .6s;
+      transition-timing-function: ease;
+    }
+
+    html, body {
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      font-family: 'Monaco', monospace; /* Adicionando a fonte Monaco */
+    }
+
+    body {
+      background: var(--red);
+      font-weight: 400;
+    }
+
+    /* Wrapper principal */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Container dos botões - Aqui usamos flex-direction: row para alinhar os botões lado a lado */
+    .container {
+      display: flex;
+      flex-direction: row; /* Garantindo que os botões fiquem lado a lado */
+      justify-content: center; /* Centraliza os botões */
+      gap: 20px; /* Espaçamento entre os botões */
+      padding: 1em;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--white);
+      font-size: 40px;
+      font-weight: 900;
+      margin: 0 0 2em;
+      position:relative;
+      top: -20px;
+    }
+
+    p {
+      color: var(--white);
+      font-size: 12px;
+    }
+
+    p a {
+      background: rgba(var(--white), 0);
+      border-bottom: 1px solid;
+      color: var(--white);
+      line-height: 1.4;
+      padding: .25em;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      background: rgba(var(--white), 1);
+      color: var(--red);
+    }
+
+    /* Estilos para os botões */
+    .btn {
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 45px;
+      margin: 0 0 2em;
+      max-width: 160px;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      width: 100%; 
+    }
+
+    /* Botão 1 */
+    .btn-1 {
+      background: #b094ff;
+      font-weight: 100;
+    }
+
+    .btn-1 svg {
+      height: 45px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .btn-1 rect {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-dasharray: 422, 0;
+      transition: all 0.35s linear;
+    }
+
+    .btn-1:hover {
+      background: rgba(var(--red), 0);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .btn-1:hover rect {
+      stroke-width: 5;
+      stroke-dasharray: 15, 310;
+      stroke-dashoffset: 48;
+      transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* Botão 2 */
+    .btn-2 {
+      letter-spacing: 0;
+    }
+
+    .btn-2:hover,
+    .btn-2:active {
+      letter-spacing: 5px;
+    }
+
+    .btn-2:after,
+    .btn-2:before {
+      backface-visibility: hidden;
+      border: 1px solid rgba(#fff, 0);
+      bottom: 0px;
+      content: " ";
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      transition: all 280ms ease-in-out;
+      width: 0;
+    }
+
+    .btn-2:hover:after,
+    .btn-2:hover:before {
+      backface-visibility: hidden;
+      border-color: #fff;
+      transition: width 350ms ease-in-out;
+      width: 70%;
+    }
+
+    .btn-2:hover:before {
+      bottom: auto;
+      top: 0;
+      width: 70%;
+    }
+
+    /* Botão 3 */
+    .btn-3 {
+      background: #a1c6f1;
+      border: 1px solid #9e2b98;
+      box-shadow: 0px 2px 0 #26429c, 2px 4px 6px #9e5d5d;
+      font-weight: 900;
+      letter-spacing: 1px;
+      transition: all 150ms linear;
+    }
+
+    .btn-3:hover {
+      background: #632aa5;
+      border: 1px solid rgba(#000, .05);
+      box-shadow: 1px 1px 2px rgba(#fff, .2);
+      color: #f4a3a3;
+      text-decoration: none;
+      text-shadow: -1px -1px 0 #1c699c;
+      transition: all 250ms linear;
+    }
+
+    /* Botão 4 */
+    .btn-4 {
+      border: 1px solid;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .btn-4 span {
+      z-index: 20;
+    }
+
+    .btn-4:after {
+      background: #fff;
+      content: "";
+      height: 155px;
+      left: -75px;
+      opacity: .2;
+      position: absolute;
+      top: -50px;
+      transform: rotate(35deg);
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      width: 50px;
+      z-index: -10;
+    }
+
+    .btn-4:hover:after {
+      left: 120%;
+      transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* Botão 5 */
+    .btn-5 {
+      border: 0 solid;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+      outline: 1px solid;
+      outline-color: rgba(255, 255, 255, .5);
+      outline-offset: 0px;
+      text-shadow: none;
+      transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .btn-5:hover {
+      border: 1px solid;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+      outline-color: rgba(255, 255, 255, 0);
+      outline-offset: 15px;
+      text-shadow: 1px 1px 2px #427388;
+    }
+   /* Espaço entre o menu e a seção de Diplomas */
+/* Espaço entre o menu e a seção de Diplomas */
+.diplomas {
+  background: #fff;
+  color: #000;
+  padding: 2em;
+  margin-top: 3em; /* Espaçamento entre o menu e diplomas */
+  border-radius: 10px;
+}
+
+.diplomas h2 {
+  color: #7b0ab0;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+.diplomas-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2em;
+  max-height: 400px;
+  overflow-y: auto; /* Rolagem vertical se necessário */
+  padding-bottom: 2em; /* Adiciona um pouco de espaço extra no final para o conteúdo */
+}
+
+.text-left {
+  flex: 0 0 30%; /* O texto ocupará apenas 30% da largura total da área disponível */
+  padding-right: 2em; /* Adiciona um pequeno espaçamento à direita do texto */
+}
+
+.text-left p {
+  font-size: 16px;
+  margin-bottom: 1em;
+}
+
+.photos-right {
+  flex: 1; /* As fotos ocuparão o restante da largura disponível */
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.photos-right img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra nas imagens */
+  object-fit: cover;
+}
+
+/* Efeito hover nas imagens */
+.photos-right img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+
+<section class="buttons">
+  <h1>Desenvolvedor full stack</h1>
+  <div class="container">
+    
+    <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" class="btn btn-1">
+      <svg>
+        <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+      </svg>
+      Diplomas
+    </a>
+
+    <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" class="btn btn-2">Social</a>
+
+    <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" class="btn btn-3">Projetos</a>
+
+    <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" class="btn btn-4"><span>Softskills</span></a>
+
+    <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" class="btn btn-5">Blog</a>
+    
+  </div>
+  <p>Follow on <a href="https://www.instagram.com/euln22/profilecard/?igsh=MXZsOG83MjZhNnhhYg==" target="_blank">Twitter</a></p>
+  <br>
+  <section class="diplomas">
+    <h2>Meus Diplomas</h2>
+    <div class="diplomas-container">
+      <div class="text-left">
+        <p>Diploma de Desenvolvimento Full Stack</p>
+        <p>Diploma de Programação Front-end</p>
+        <p>Certificação em Banco de Dados</p>
+      </div>
+      
+      <div class="photos-right">
+        <img src="diploma1.jpg" alt="Diploma 1">
+        <img src="diploma2.jpg" alt="Diploma 2">
+        <img src="diploma3.jpg" alt="Diploma 3">
+      </div>
+    </div>
+  </section>
+  
+  </section>
+  
+  </section>
+  
+  <br>
+</section>
+
+</body>
+</html>
